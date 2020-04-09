@@ -4,6 +4,7 @@ import './App.css';
 import Nav from './Nav'
 import SearchBar from './SearchBar'
 import Scores from './Scores'
+import CityName from './CityName'
 
 
 
@@ -114,7 +115,7 @@ class App extends Component {
       cityChanged={this.cityChanged}
       handleSubmit={this.handleSubmit}/>
       <ul className="mainList">
-        <h2 id="cityName">{this.state.cityName}</h2>
+      <CityName cityName={this.state.cityName}/>
       {this.state.firstData === 0 ? <h2>Sorry, no records for that city.</h2> :
         scoreItems.map((value,index) => {
         return <Scores key={index}

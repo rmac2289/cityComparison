@@ -13,7 +13,7 @@ class Scores extends Component {
                 <h4 id= {this.props.score >= 7 ? "green": this.props.score < 4 ? "red":"score"}>
                  {this.round_to_precision(this.props.score, 0.25)} / 10
                  <span>
-                 {Math.floor(this.props.score) === 1 ? 
+                {Math.floor(this.props.score) === 1 ? 
                  <p id="red">*</p> : Math.floor(this.props.score) === 2 ? 
                  <p id="red">**</p> : Math.floor(this.props.score) === 3 ? 
                  <p id="red">***</p> : Math.floor(this.props.score) === 4 ? 

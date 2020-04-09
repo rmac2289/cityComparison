@@ -1,34 +1,42 @@
 .header {
-    background-image: url('./images/usa.jpg');
+    background-image: url('./images/world.jpg');
     min-height: 350px;
-    background-size:contain ;
+    background-size:cover;
     background-repeat: no-repeat;
     border-bottom: 2px solid black;
-    
 }
 .title {
-    font-size: 40px;
-    padding-top: 25%;
-    padding-left: 10%
+    padding-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
 }
-#u {
-    color: red;
+.title h1{
+    background-color: rgba(100,0,0, 0.5); 
+    color: white;
+    font-weight: 800;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    width: 90%;
+    text-align: center;
+    border: 2px solid maroon;
+    height: 160px;
+    margin-left: auto;
+    margin-right: auto;
+    
+  }
+@media only screen and (min-width:420px){
+    .title h1 {
+        height: 100%;
+    }
 }
-#s {
-    color: blue;
-}
-
-@media only screen and (min-width:720px){
-    .title {
-        padding-right: 70px;
-        padding-top: 150px;
+@media only screen and (min-width: 520px){
+    .title h1 {
         font-size: 50px;
     }
+}
+@media only screen and (min-width:720px){
     .header {
-        background-image: url('./images/usa.jpg');
-        min-height: 350px;            
-        background-size:contain ;
-        background-repeat: no-repeat;
         text-align: right;
         border-bottom: 2px solid black;
         }

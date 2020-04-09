@@ -10,7 +10,7 @@ class SearchBar extends Component {
                 <InputGroup.Prepend>
                     <InputGroup.Text id="inputGroup-sizing-lg" >enter city</InputGroup.Text>
                 </InputGroup.Prepend>
-                <FormControl value={this.props.value} onChange={this.props.cityChanged} aria-label="Large" aria-describedby="inputGroup-sizing-lg"/>
+                <FormControl required value={this.props.value} onChange={this.props.cityChanged} aria-label="Large" aria-describedby="inputGroup-sizing-lg"/>
             </InputGroup>
             <Button type="submit" variant="primary" id="searchbutton">search</Button>
         </form>
