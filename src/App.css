@@ -1,4 +1,15 @@
 * {
   box-sizing: border-box;
-  margin: 0;
+  font-family: 'Work Sans', sans-serif;
+  }
+#cityName {
+  font-weight: 800;
+  font-size: 40px;
+  margin-top: 25px;
+}
+.mainList {
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+  padding: 0;
 }

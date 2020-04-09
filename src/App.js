@@ -3,6 +3,7 @@ import Header from './Header';
 import './App.css';
 import Nav from './Nav'
 import SearchBar from './SearchBar'
+import Scores from './Scores'
 
 
 
@@ -12,9 +13,19 @@ class App extends Component {
     super(props)
   this.state = {
     city: "",
-    nameScore: []
+    nameScore: [],
+    cityScore: "",
+    cityName: ""
   }
 }
+  resetList = () => {
+    this.setState({
+      city: "",
+      nameScore: [],
+      cityScore: "",
+      cityName: ""
+    })
+  }
 
   cityChanged = (event) => {
     this.setState({
@@ -24,6 +35,7 @@ class App extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    this.resetList();
   const options =  {
     method: 'GET',
     headers: {
@@ -42,6 +54,8 @@ class App extends Component {
     return response.json();
   })
   .then(data => {
+    this.setState({firstData: data.count})
+    console.log(data)
     let searchResults = "city:search-results"
     rawData = data._embedded[searchResults][0]._links["city:item"].href;
     return fetch(rawData,options)
@@ -62,6 +76,8 @@ class App extends Component {
         return response.json();
       })
       .then(newerData => {
+        this.setState({cityName: [...this.state.cityName, newerData.full_name]})
+        console.log(newerData)
         scores = newerData._links["ua:scores"].href
         return fetch(scores, options)
         .then(response => {
@@ -71,14 +87,14 @@ class App extends Component {
           return response.json()
         })
         .then(scoreData => {
+          console.log(scoreData)
           console.log(scoreData.categories)
           let scores = scoreData.categories;
+
             this.setState({
-              nameScore: [...this.state.nameScore, ...scores]
-              
-          } );
-          
-          
+              nameScore: [...this.state.nameScore, ...scores],
+              cityScore: [...this.state.cityScore, scoreData.teleport_city_score]
+          });
         })
       })
     })
@@ -88,8 +104,8 @@ class App extends Component {
     })
   })
 }
-
   render(){
+    const scoreItems = this.state.nameScore
   return (
     <div className="App">
       <Nav />
@@ -97,6 +113,16 @@ class App extends Component {
       <SearchBar 
       cityChanged={this.cityChanged}
       handleSubmit={this.handleSubmit}/>
+      <ul className="mainList">
+        <h2 id="cityName">{this.state.cityName}</h2>
+      {this.state.firstData === 0 ? <h2>Sorry, no records for that city.</h2> :
+        scoreItems.map((value,index) => {
+        return <Scores key={index}
+          name={value.name}
+          score={value.score_out_of_10} 
+          />
+      })}
+      </ul>
       
     </div>
   );

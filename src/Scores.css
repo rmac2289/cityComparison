@@ -1,0 +1,21 @@
+
+.listItem {
+    border-bottom: 1px solid lightgray;
+}
+#green {
+    color: green;
+}
+#red {
+    color: red;
+}
+#score {
+    color: blue;
+}
+#name {
+    font-weight: 500;
+}
+p {
+    letter-spacing: .5em;
+    font-weight: 900;
+    margin-top: 7px;
+}
