@@ -1,0 +1,40 @@
+.header {
+    background-image: url('./images/usa.jpg');
+    min-height: 350px;
+    background-size:contain ;
+    background-repeat: no-repeat;
+    border-bottom: 2px solid black;
+    
+}
+.title {
+    font-size: 40px;
+    padding-top: 25%;
+    padding-left: 10%
+}
+#u {
+    color: red;
+}
+#s {
+    color: blue;
+}
+
+@media only screen and (min-width:720px){
+    .title {
+        padding-right: 70px;
+        padding-top: 150px;
+        font-size: 50px;
+    }
+    .header {
+        background-image: url('./images/usa.jpg');
+        min-height: 350px;            
+        background-size:contain ;
+        background-repeat: no-repeat;
+        text-align: right;
+        border-bottom: 2px solid black;
+        }
+}
+@media only screen and (min-width:900px){
+    .title {
+        font-size: 75px;
+    }
+}
