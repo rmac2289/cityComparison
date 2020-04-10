@@ -1,0 +1,10 @@
+#cityscore {
+    border: 1px solid black;
+    padding: 1%;
+    max-width: 35%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.nameAndScore {
+    text-align: center;
+}

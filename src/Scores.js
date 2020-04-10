@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MoreInfo from './MoreInfo';
 import './Scores.css';
 
 class Scores extends Component {
@@ -12,21 +13,9 @@ class Scores extends Component {
                 <h3 id="name">{this.props.name}</h3>
                 <h4 id= {this.props.score >= 7 ? "green": this.props.score < 4 ? "red":"score"}>
                  {this.round_to_precision(this.props.score, 0.25)} / 10
-                 <span>
-                {Math.floor(this.props.score) === 1 ? 
-                 <p id="red">*</p> : Math.floor(this.props.score) === 2 ? 
-                 <p id="red">**</p> : Math.floor(this.props.score) === 3 ? 
-                 <p id="red">***</p> : Math.floor(this.props.score) === 4 ? 
-                 <p id="score">****</p> : Math.floor(this.props.score) === 5 ? 
-                 <p id="score">*****</p> : Math.floor(this.props.score) === 6 ? 
-                 <p id="score">******</p> : Math.floor(this.props.score) === 7 ? 
-                 <p id="green">*******</p> : Math.floor(this.props.score) === 8 ? 
-                 <p id="green">********</p> : Math.floor(this.props.score) === 9 ? 
-                 <p id="green">*********</p> : Math.floor(this.props.score) === 10 ?
-                 <p id="green">**********</p> :
-                 <p></p>}
-                 </span>
+                 <span><p id="dot">{this.props.bar}</p></span>
                  </h4>
+                 <MoreInfo />
             </li>
         )
     }

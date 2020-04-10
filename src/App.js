@@ -7,8 +7,6 @@ import Scores from './Scores'
 import CityName from './CityName'
 
 
-
-
 class App extends Component {
   constructor(props){
     super(props)
@@ -16,7 +14,9 @@ class App extends Component {
     city: "",
     nameScore: [],
     cityScore: "",
-    cityName: ""
+    cityName: "",
+    detailInfo: []
+    
   }
 }
   resetList = () => {
@@ -43,9 +43,10 @@ class App extends Component {
       "Content-Type": "application/json",
     }
   }
-  let rawData;
-  let urbanData;
+  let uaAPI;
+  let scoresAPI;
   let scores;
+  let details;
   let wrong = "Something went wrong, please try again later"
   fetch(`https://api.teleport.org/api/cities/?search=${this.state.city}`,options)
   .then(response => {
@@ -55,11 +56,11 @@ class App extends Component {
     return response.json();
   })
   .then(data => {
-    this.setState({firstData: data.count})
+    this.setState({NoResult: data.count})
     console.log(data)
     let searchResults = "city:search-results"
-    rawData = data._embedded[searchResults][0]._links["city:item"].href;
-    return fetch(rawData,options)
+    uaAPI = data._embedded[searchResults][0]._links["city:item"].href;
+    return fetch(uaAPI,options)
   })
     .then(response => {
       if(!response.ok){
@@ -68,8 +69,8 @@ class App extends Component {
       return response.json();
     })
     .then(newData => {
-      urbanData = newData._links["city:urban_area"].href
-      return fetch(urbanData,options)
+      scoresAPI = newData._links["city:urban_area"].href
+      return fetch(scoresAPI,options)
       .then(response => {
         if(!response.ok){
           throw new Error(wrong);
@@ -79,6 +80,7 @@ class App extends Component {
       .then(newerData => {
         this.setState({cityName: [...this.state.cityName, newerData.full_name]})
         console.log(newerData)
+        details = newerData._links["ua:details"].href
         scores = newerData._links["ua:scores"].href
         return fetch(scores, options)
         .then(response => {
@@ -89,13 +91,26 @@ class App extends Component {
         })
         .then(scoreData => {
           console.log(scoreData)
-          console.log(scoreData.categories)
           let scores = scoreData.categories;
 
             this.setState({
               nameScore: [...this.state.nameScore, ...scores],
               cityScore: [...this.state.cityScore, scoreData.teleport_city_score]
           });
+          return fetch(details, options)
+          .then(response => {
+            if (!response.ok){ 
+              throw new Error(wrong)
+            }
+            return response.json()
+          })
+          .then(detailsData => {
+            console.log(detailsData)
+            this.setState({
+              detailInfo: [...this.state.detailInfo, ...detailsData.categories]
+            })
+            console.log(this.state.detailInfo)
+          })
         })
       })
     })
@@ -106,7 +121,15 @@ class App extends Component {
   })
 }
   render(){
+    let star = '•'
     const scoreItems = this.state.nameScore
+    const scoresList = scoreItems.map((value,index) => {
+      return <Scores key={index}
+        name={value.name}
+        score={value.score_out_of_10}
+        bar={star.repeat(Math.floor(value.score_out_of_10))}/>
+    })
+
   return (
     <div className="App">
       <Nav />
@@ -114,17 +137,11 @@ class App extends Component {
       <SearchBar 
       cityChanged={this.cityChanged}
       handleSubmit={this.handleSubmit}/>
+      <CityName cityName={this.state.cityName} score={this.state.cityScore}/>
+      {this.state.cityName !== '' &&
       <ul className="mainList">
-      <CityName cityName={this.state.cityName}/>
-      {this.state.firstData === 0 ? <h2>Sorry, no records for that city.</h2> :
-        scoreItems.map((value,index) => {
-        return <Scores key={index}
-          name={value.name}
-          score={value.score_out_of_10} 
-          />
-      })}
-      </ul>
-      
+      {this.state.NoResult === 0 ? <h2>Sorry, no records for that city.</h2> : scoresList}
+      </ul>}
     </div>
   );
 }

@@ -2,6 +2,7 @@
     min-height: 80px;
     border-bottom: 2px solid black;
     background: gray;
+    filter: blur(2px)
 }
 ul {
     list-style: none;

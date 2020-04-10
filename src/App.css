@@ -8,8 +8,10 @@
   margin-top: 25px;
 }
 .mainList {
-  margin-left: auto;
+  margin-left: 50px;
   margin-right: auto;
-  width: 75%;
-  padding: 0;
+  width: 40%;
+  padding: 1%;
+  border: 1px solid lightgray;
+  
 }

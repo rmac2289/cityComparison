@@ -1,6 +1,8 @@
 
 .listItem {
     border-bottom: 1px solid lightgray;
+    padding-top: 1%;
+    margin-bottom: 5px;
 }
 #green {
     color: green;
@@ -15,7 +17,12 @@
     font-weight: 600;
 }
 p {
-    letter-spacing: .5em;
     font-weight: 900;
-    margin-top: 7px;
+}
+#dot {
+    font-size: 2em;
+    padding: 0;
+    margin: 0;
+    opacity: .75;
+    letter-spacing: -.1em
 }
