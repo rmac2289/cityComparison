@@ -1,0 +1,22 @@
+footer {
+    border-top: 2px solid black;
+    background: rgb(0,0,0,0.7);
+    min-height: 100px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+   
+}
+#link {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+#link:hover {
+    color: grey;
+    transition: .5s;
+}
+.footerList {
+    color: white;
+    list-style: none;
+    padding: 2%;
+}

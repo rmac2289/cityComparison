@@ -5,6 +5,8 @@ import Nav from './Nav'
 import SearchBar from './SearchBar'
 import Scores from './Scores'
 import CityName from './CityName'
+import MapContainer from './Map'
+import Footer from './Footer'
 
 
 class App extends Component {
@@ -15,25 +17,27 @@ class App extends Component {
     nameScore: [],
     cityScore: "",
     cityName: "",
-    detailInfo: []
-    
+    detailInfo: [],
+    latLong: {
+      
+    }
   }
 }
   resetList = () => {
     this.setState({
-      city: "",
       nameScore: [],
       cityScore: "",
-      cityName: ""
+      cityName: "",
+      detailInfo: [],
+      latLong: {}
     })
   }
-
   cityChanged = (event) => {
     this.setState({
       city: event.target.value
     });
   }
-
+  
   handleSubmit = (event) => {
     event.preventDefault();
     this.resetList();
@@ -47,6 +51,7 @@ class App extends Component {
   let scoresAPI;
   let scores;
   let details;
+  let coordinates;
   let wrong = "Something went wrong, please try again later"
   fetch(`https://api.teleport.org/api/cities/?search=${this.state.city}`,options)
   .then(response => {
@@ -78,7 +83,10 @@ class App extends Component {
         return response.json();
       })
       .then(newerData => {
-        this.setState({cityName: [...this.state.cityName, newerData.full_name]})
+        coordinates = newerData.bounding_box.latlon
+        this.setState({
+          cityName: [...this.state.cityName, newerData.full_name],
+          latLong: {west: coordinates.west, north: coordinates.north, south: coordinates.south, east: coordinates.east}})
         console.log(newerData)
         details = newerData._links["ua:details"].href
         scores = newerData._links["ua:scores"].href
@@ -90,7 +98,6 @@ class App extends Component {
           return response.json()
         })
         .then(scoreData => {
-          console.log(scoreData)
           let scores = scoreData.categories;
 
             this.setState({
@@ -121,6 +128,13 @@ class App extends Component {
   })
 }
   render(){
+    
+   const north = this.state.latLong.north
+   const south = this.state.latLong.south
+   const east = this.state.latLong.east
+   const west = this.state.latLong.west
+    const lat = (north+south)/2
+    const long = (east+west)/2
     let star = '•'
     const scoreItems = this.state.nameScore
     const scoresList = scoreItems.map((value,index) => {
@@ -135,13 +149,24 @@ class App extends Component {
       <Nav />
       <Header />
       <SearchBar 
-      cityChanged={this.cityChanged}
-      handleSubmit={this.handleSubmit}/>
-      <CityName cityName={this.state.cityName} score={this.state.cityScore}/>
+        cityChanged={this.cityChanged}
+        handleSubmit={this.handleSubmit}
+        value={this.state.city}/>
+      <MapContainer
+        north={north} 
+        west={west} 
+        south={south} 
+        east={east} 
+        lattitude={lat} 
+        longitude={long} />
+      <CityName 
+        cityName={this.state.cityName} 
+        score={this.state.cityScore}/>
       {this.state.cityName !== '' &&
       <ul className="mainList">
       {this.state.NoResult === 0 ? <h2>Sorry, no records for that city.</h2> : scoresList}
       </ul>}
+      <Footer />
     </div>
   );
 }

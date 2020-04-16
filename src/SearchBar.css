@@ -1,6 +1,5 @@
 .searchbar {
-    background: grey;
-    border-bottom: 2px solid black;
+    background: rgb(0,0,0,0.7);
     justify-content: center;
     display: flex;
     flex-direction: column;

@@ -1,25 +1,48 @@
 .header {
+    margin-top:40px;
     background-image: url('./images/world.jpg');
     min-height: 350px;
     background-size:cover;
     background-repeat: no-repeat;
-    border-bottom: 2px solid black;
 }
 .title {
     padding-top: 100px;
     margin-left: auto;
     margin-right: auto;
     width: 80%;
+    padding-bottom: 25px;
+}
+#headerP {
+    font-size: 20px;
+    text-align: center;
+    background: rgb(200,215,212, 0.85);
+    color: rgb(0,0,0,0.8);
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    border: 2px solid rgb(0,0,0,0.7);
+    padding: 1%;
+    margin-bottom: 0;
+    font-family: 'Open Sans', sans-serif;
+    
+}
+#span {
+    border-top: 1px solid rgb(0,0,0,0.1);
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
 }
 .title h1{
-    background-color: rgba(100,0,0, 0.5); 
-    color: white;
-    font-weight: 800;
+    font-family: 'Yellowtail', cursive;
+    font-size: 70px;
+    background-color: rgb(200,215,212, 0.95);
+    color: black;
+    color: rgb(0,0,0,0.85);
     padding-top: 30px;
     padding-bottom: 30px;
     width: 90%;
     text-align: center;
-    border: 2px solid maroon;
+    border: 2px solid rgb(0,0,0,0.7);
     height: 160px;
     margin-left: auto;
     margin-right: auto;
@@ -32,14 +55,16 @@
 }
 @media only screen and (min-width: 520px){
     .title h1 {
-        font-size: 50px;
+        font-size: 80px;
     }
 }
 @media only screen and (min-width:720px){
     .header {
         text-align: right;
-        border-bottom: 2px solid black;
         }
+    #headerP {
+        width: 65%;
+    }
 }
 @media only screen and (min-width:900px){
     .title {

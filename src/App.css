@@ -2,6 +2,9 @@
   box-sizing: border-box;
   font-family: 'Work Sans', sans-serif;
   }
+.App {
+  background-color: rgb(200,215,212, 0.95)
+}
 #cityName {
   font-weight: 800;
   font-size: 40px;
@@ -13,5 +16,6 @@
   width: 40%;
   padding: 1%;
   border: 1px solid lightgray;
+ 
   
 }
