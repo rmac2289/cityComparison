@@ -1,6 +1,6 @@
 .header {
     margin-top:40px;
-    background-image: url('./images/world.jpg');
+    background-image: linear-gradient(rgba(200,215,212,0.4),rgba(200,215,212,0.5), white), url('./images/world.jpg');
     min-height: 350px;
     background-size:cover;
     background-repeat: no-repeat;
@@ -15,7 +15,7 @@
 #headerP {
     font-size: 20px;
     text-align: center;
-    background: rgb(200,215,212, 0.85);
+    background: rgb(200,215,212, 0.75);
     color: rgb(0,0,0,0.8);
     width: 85%;
     margin-left: auto;
@@ -35,9 +35,9 @@
 .title h1{
     font-family: 'Yellowtail', cursive;
     font-size: 70px;
-    background-color: rgb(200,215,212, 0.95);
+    background-color: rgb(200,215,212, 0.75);
     color: black;
-    color: rgb(0,0,0,0.85);
+    color: rgb(0,0,0,0.75);
     padding-top: 30px;
     padding-bottom: 30px;
     width: 90%;
