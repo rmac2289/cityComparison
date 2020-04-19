@@ -136,13 +136,12 @@ class App extends Component {
    const west = this.state.latLong.west
     const lat = (north+south)/2
     const long = (east+west)/2
-    let star = '•'
     const scoreItems = this.state.nameScore
     const scoresList = scoreItems.map((value,index) => {
       return <Scores key={index}
         name={value.name}
         score={value.score_out_of_10}
-        bar={star.repeat(Math.floor(value.score_out_of_10))}/>
+        />
     })
 
   return (
