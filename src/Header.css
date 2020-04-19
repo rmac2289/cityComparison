@@ -1,6 +1,6 @@
 .header {
     margin-top:40px;
-    background-image: linear-gradient(rgba(200,215,212,0.4),rgba(200,215,212,0.5), white), url('./images/world.jpg');
+    background-image: linear-gradient(rgba(200,215,212,0.3),rgba(200,215,212,0.4), white), url('./images/world.jpg');
     min-height: 350px;
     background-size:cover;
     background-repeat: no-repeat;

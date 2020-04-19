@@ -7,6 +7,7 @@ import Scores from './Scores'
 import CityName from './CityName'
 import MapContainer from './Map'
 import Footer from './Footer'
+import CityImage from './CityImage'
 
 
 class App extends Component {
@@ -17,10 +18,9 @@ class App extends Component {
     nameScore: [],
     cityScore: "",
     cityName: "",
-    detailInfo: [],
-    latLong: {
-      
-    }
+    webPhoto: null,
+    mobilePhoto: null,
+    latLong: {}
   }
 }
   resetList = () => {
@@ -50,7 +50,7 @@ class App extends Component {
   let uaAPI;
   let scoresAPI;
   let scores;
-  let details;
+  let image;
   let coordinates;
   let wrong = "Something went wrong, please try again later"
   fetch(`https://api.teleport.org/api/cities/?search=${this.state.city}`,options)
@@ -62,6 +62,7 @@ class App extends Component {
   })
   .then(data => {
     this.setState({NoResult: data.count})
+    this.state.NoResult === 0 ? alert("sorry, that city isn't in our system"):
     console.log(data)
     let searchResults = "city:search-results"
     uaAPI = data._embedded[searchResults][0]._links["city:item"].href;
@@ -88,7 +89,7 @@ class App extends Component {
           cityName: [...this.state.cityName, newerData.full_name],
           latLong: {west: coordinates.west, north: coordinates.north, south: coordinates.south, east: coordinates.east}})
         console.log(newerData)
-        details = newerData._links["ua:details"].href
+        image = newerData._links["ua:images"].href
         scores = newerData._links["ua:scores"].href
         return fetch(scores, options)
         .then(response => {
@@ -104,19 +105,19 @@ class App extends Component {
               nameScore: [...this.state.nameScore, ...scores],
               cityScore: [...this.state.cityScore, scoreData.teleport_city_score]
           });
-          return fetch(details, options)
+          return fetch(image, options)
           .then(response => {
             if (!response.ok){ 
               throw new Error(wrong)
             }
             return response.json()
           })
-          .then(detailsData => {
-            console.log(detailsData)
+          .then(imageLink => {
             this.setState({
-              detailInfo: [...this.state.detailInfo, ...detailsData.categories]
+              webPhoto: imageLink.photos[0].image.web,
+              mobilePhoto: imageLink.photos[0].image.mobilePhoto
             })
-            console.log(this.state.detailInfo)
+            
           })
         })
       })
@@ -162,9 +163,14 @@ class App extends Component {
       <CityName 
         cityName={this.state.cityName} 
         score={this.state.cityScore}/>
+        
+      <CityImage 
+      image={this.state.webPhoto}
+      hidden={this.state.webPhoto}
+      />  
       {this.state.cityName !== '' &&
       <ul className="mainList">
-      {this.state.NoResult === 0 ? <h2>Sorry, no records for that city.</h2> : scoresList}
+      {scoresList}
       </ul>}
       <Footer />
     </div>

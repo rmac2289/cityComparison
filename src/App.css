@@ -3,19 +3,34 @@
   font-family: 'Work Sans', sans-serif;
   }
 .App {
-  background-color: rgb(200,215,212, 0.95)
+  background-color: rgb(200,215,212, 0.2)
 }
 #cityName {
   font-weight: 800;
   font-size: 40px;
   margin-top: 25px;
 }
-.mainList {
-  margin-left: 50px;
-  margin-right: auto;
-  width: 40%;
-  padding: 1%;
-  border: 1px solid lightgray;
- 
-  
+#sorry {
+  min-height: 100px;
 }
+.mainList {
+  margin-top: 2%;
+  margin-right: auto;
+  margin-left: auto;
+  width: 90%;
+  padding: 1%;
+  display: grid;
+  grid-gap: 10px;
+}
+@media only screen and (min-width: 520px){
+  .mainList{
+  grid-template-columns: repeat(2, 1fr);
+}
+}
+@media only screen and (min-width: 1020px){
+  .mainList{
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+  }
+}
+

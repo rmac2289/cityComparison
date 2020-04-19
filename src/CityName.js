@@ -11,7 +11,7 @@ function CityName(props) {
             <div className={props.score > 0 ? "nameAndScore":"hidden"}>
             <h2 id="cityName">{props.cityName}</h2>
             {props.score > 0 &&
-            <h3 id="cityscore">City Score: {round_to_precision(Math.round(props.score),.25)} / 100</h3>}
+            <h3 id="cityscore">City Score: {round_to_precision(Math.round(props.score),.25)}%</h3>}
             </div>
         )
     }

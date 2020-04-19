@@ -1,28 +1,47 @@
-
 .listItem {
-    border-bottom: 1px solid lightgray;
-    padding-top: 1%;
-    margin-bottom: 5px;
-}
-#green {
-    color: green;
+    box-shadow: 1px 1px 1px rgb(200, 215, 212, 0.7);
+    border-radius: 3%;
 }
 #red {
-    color: red;
+    background-color: maroon;
+    box-shadow: 1.25px 1.25px 1.25px rgb(0,0,0,0.3);
+    transition: 1s;
 }
+
 #score {
-    color: blue;
+    background-color: navy;
+    box-shadow: 1.25px 1.25px 1.25px rgb(0,0,0,0.3);
+    transition: 1s;
 }
+
+#green, #red, #score {
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    padding: 1% 1% 1% 2%;
+}
+#green {
+    background-color: rgb(90,142,35);
+    box-shadow: 1.25px 1.25px 1.25px rgb(0,0,0,0.3);
+    transition: 1s;
+}
+#red:hover {
+    background-color: rgb(170,0,0);
+    box-shadow: .75px .75px .75px rgb(0,0,0,0.5);
+    
+}
+#score:hover {
+    background-color: blue;
+    box-shadow: .75px .75px .75px rgb(0,0,0,0.5);
+}
+#green:hover {
+    background-color: green;
+    box-shadow: .75px .75px .75px rgb(0,0,0,0.5);
+}
+
 #name {
     font-weight: 600;
-}
-p {
-    font-weight: 900;
-}
-#dot {
-    font-size: 2em;
-    padding: 0;
-    margin: 0;
-    opacity: .75;
-    letter-spacing: -.1em
+    font-size: 1.3em;
+    font-family: 'Work Sans', sans-serif;
+    color: rgb(0, 0, 0, 0.7);
 }
