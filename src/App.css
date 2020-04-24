@@ -16,6 +16,7 @@
   font-weight: 600;
   width: 125px;
   text-align: center;
+  border: 1px solid rgb(0,0,0,0.05) !important;
 }
 .tabs a:hover {
   border: 1px solid rgb(0,0,0,0.3) !important;
@@ -29,7 +30,7 @@
 #sorry {
   min-height: 100px;
 }
-.mainList {
+.mainList, .salaryList {
   margin-top: 2%;
   margin-right: auto;
   margin-left: auto;
@@ -39,14 +40,13 @@
   grid-gap: 10px;
 }
 @media only screen and (min-width: 520px){
-  .mainList{
+  .mainList, .salaryList{
   grid-template-columns: repeat(2, 1fr);
 }
 }
 @media only screen and (min-width: 1020px){
-  .mainList{
+  .mainList, .salaryList{
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;
   }
 }
 

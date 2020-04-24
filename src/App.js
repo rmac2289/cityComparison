@@ -9,6 +9,9 @@ import MapContainer from './Map'
 import Footer from './Footer'
 import CityImage from './CityImage'
 import { Tabs, Tab } from 'react-bootstrap'
+import Salaries from './Salaries'
+
+
 
 
 class App extends Component {
@@ -21,7 +24,8 @@ class App extends Component {
       cityName: "",
       webPhoto: null,
       mobilePhoto: null,
-      latLong: {}
+      latLong: {},
+      salaryData: [],
     }
   }
   resetList = () => {
@@ -30,7 +34,8 @@ class App extends Component {
       cityScore: "",
       cityName: "",
       detailInfo: [],
-      latLong: {}
+      latLong: {},
+      salaryData: []
     })
   }
   cityChanged = (event) => {
@@ -48,11 +53,18 @@ class App extends Component {
         "Content-Type": "application/json",
       }
     }
+    const options2 = {
+      method: 'GET',
+      headers: {
+        "Authorization": "Bearer XGZAAmiVIDaSrACEzilfkTTQGzrE",
+        "Content-Type": "application/json",
+        "accept": "application/json"
+      }
+    }
     let uaAPI;
     let scoresAPI;
     let scores;
     let image;
-    let coordinates;
     let wrong = "Something went wrong, please try again later"
     fetch(`https://api.teleport.org/api/cities/?search=${this.state.city}`, options)
       .then(response => {
@@ -76,6 +88,10 @@ class App extends Component {
         return response.json();
       })
       .then(newData => {
+        console.log('new data')
+        console.log(newData)
+        this.setState({ latLong: { lat: newData.location.latlon.latitude, long: newData.location.latlon.longitude } })
+        console.log(this.state.latLong)
         scoresAPI = newData._links["city:urban_area"].href
         return fetch(scoresAPI, options)
           .then(response => {
@@ -85,10 +101,8 @@ class App extends Component {
             return response.json();
           })
           .then(newerData => {
-            coordinates = newerData.bounding_box.latlon
             this.setState({
-              cityName: [...this.state.cityName, newerData.full_name],
-              latLong: { west: coordinates.west, north: coordinates.north, south: coordinates.south, east: coordinates.east }
+              cityName: [...this.state.cityName, newerData.full_name]
             })
             console.log(newerData)
             image = newerData._links["ua:images"].href
@@ -118,8 +132,37 @@ class App extends Component {
                     this.setState({
                       webPhoto: imageLink.photos[0].image.web,
                       mobilePhoto: imageLink.photos[0].image.mobilePhoto
-                    })
-
+                    });
+                    let salaries = newerData._links["ua:salaries"].href
+                    return fetch(salaries, options)
+                      .then(response => {
+                        if (!response.ok) {
+                          throw new Error(wrong)
+                        }
+                        return response.json()
+                      })
+                      .then(salary => {
+                        
+                        this.setState({
+                          salaryData: [...this.state.salaryData, ...salary.salaries]
+                        })
+                       /* return fetch(url, options2)
+                          .then(response => {
+                            if (!response.ok) {
+                              throw new Error(wrong)
+                            }
+                            return response.json()
+                          })
+                          .then(poiData => {console.log(poiData)
+                            
+                            
+                          })*/
+                          .catch(err => {
+                            this.setState({
+                              error: err.message
+                            })
+                          })
+                      })
                   })
               })
           })
@@ -132,17 +175,23 @@ class App extends Component {
   }
   render() {
 
-    const north = this.state.latLong.north
-    const south = this.state.latLong.south
-    const east = this.state.latLong.east
-    const west = this.state.latLong.west
-    const lat = (north + south) / 2
-    const long = (east + west) / 2
+    const lat = this.state.latLong.lat
+    const long = this.state.latLong.long
     const scoreItems = this.state.nameScore
     const scoresList = scoreItems.map((value, index) => {
       return <Scores key={index}
         name={value.name}
         score={value.score_out_of_10}
+      />
+    })
+    const salaryItems = this.state.salaryData
+    const salaryList = salaryItems.map((value, index) => {
+      return <Salaries key={index}
+        jobName={value.job.title}
+        jobSalary25={value.salary_percentiles.percentile_25}
+        jobSalary50={value.salary_percentiles.percentile_50}
+        jobSalary75={value.salary_percentiles.percentile_75}
+        jobCity={this.state.city}
       />
     })
 
@@ -155,16 +204,12 @@ class App extends Component {
           handleSubmit={this.handleSubmit}
           value={this.state.city} />
         <MapContainer
-          north={north}
-          west={west}
-          south={south}
-          east={east}
-          lattitude={lat}
+          latitude={lat}
           longitude={long} />
         <CityName
           cityName={this.state.cityName}
           score={this.state.cityScore} />
-        {this.state.cityName !== '' &&
+        {this.state.cityName &&
           <Tabs className="tabs" defaultActiveKey="scores" id="noanim-tab-example">
             <Tab eventKey="scores" title="Scores">
               <CityImage
@@ -175,13 +220,17 @@ class App extends Component {
                 {scoresList}
               </ul>
             </Tab>
-            <Tab eventKey="profile" title="Profile">
-              <h2>page 2</h2>
+            <Tab eventKey="Salaries" title="Salaries">
+              <ul className="salaryList">
+                {salaryList}
+                <p>** Salary range based on salaries between the 25th and 75th percentiles in respective profession</p>
+              </ul>
             </Tab>
             <Tab eventKey="contact" title="Contact">
-              <h2>page 3</h2>
+              <ul>
+              </ul>
             </Tab>
-            <Tab eventKey="contact" title="Contact">
+            <Tab eventKey="four" title="four">
               <h2>page 4</h2>
             </Tab>
           </Tabs>}

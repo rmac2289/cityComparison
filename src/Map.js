@@ -9,11 +9,8 @@ import styles from './MapStyles'
 export class MapContainer extends Component {
 
     shouldComponentUpdate() {
-        return this.props.east === undefined ? false : true}
+        return this.props.latitude === undefined ? false : true}
     render() {
-        const ne = new this.props.google.maps.LatLng({ lat: this.props.north, lng: this.props.east })
-        const sw = new this.props.google.maps.LatLng({ lat: this.props.south, lng: this.props.west })
-        const bounds = new this.props.google.maps.LatLngBounds(sw, ne);
 
         return (
             <div id="mapContainer">
@@ -24,10 +21,10 @@ export class MapContainer extends Component {
                     style={styles.mapStyles}
                     styles={styles}
                     center={{
-                        lat: this.props.lattitude,
+                        lat: this.props.latitude,
                         lng: this.props.longitude
                     }}
-                    bounds={bounds}>
+                    >
                 </Map>
             </div>
         );
@@ -36,5 +33,5 @@ export class MapContainer extends Component {
 
 
 export default GoogleApiWrapper({
-    apiKey: ApiKey,
+    apiKey: ApiKey.mapsKey,
 })(MapContainer);

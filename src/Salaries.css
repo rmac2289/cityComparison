@@ -1,0 +1,21 @@
+.listItem {
+    box-shadow: 1px 1px 1px rgb(200, 215, 212, 0.7);
+    border-radius: 3%;
+}
+#salary {
+    font-size: 18px;
+}
+#jobLink {
+    color: rgb(0,0,0,0.8);
+}
+#jobLink:hover {
+    color: navy;
+    text-decoration: none;
+    transition: .5s;
+}
+#name {
+    font-weight: 600;
+    font-size: 1.3em;
+    font-family: 'Work Sans', sans-serif;
+    color: rgb(0, 0, 0, 0.7);
+}
