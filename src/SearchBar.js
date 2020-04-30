@@ -2,6 +2,13 @@ import React from 'react';
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
 import './SearchBar.css';
 
+function validateInput(input){
+    if(input !==  /^[a-zA-Z]+$/){
+        
+    }
+
+}
+
 function SearchBar (props) {
     return(
         <form className="searchbar" onSubmit={props.handleSubmit}>

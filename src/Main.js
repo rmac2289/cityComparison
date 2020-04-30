@@ -33,6 +33,10 @@ export default function Main() {
         return response.json();
       })
       .then(citySearchData => {
+        if(citySearchData.count === 0){
+          alert("Sorry, no data for that city")
+        }
+        console.log(citySearchData)
         return fetch(citySearchData._embedded["city:search-results"][0]._links["city:item"].href)
       })
       .then(response => {
@@ -107,7 +111,7 @@ export default function Main() {
       <SearchBar
         cityChanged={cityChanged}
         handleSubmit={handleSubmit}
-        value={city} />
+        value={city}/>
       <MapContainer
         latitude={latLong.lat}
         longitude={latLong.long} />
