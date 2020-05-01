@@ -4,11 +4,7 @@ import './Nav.css';
 export default function Nav(){
     return(
         <nav className="navigation">
-            
-            <ul>
-                <li></li>
-            </ul>
-
+            <h4 className="navTitle">your best life</h4>
         </nav>
     )
 }

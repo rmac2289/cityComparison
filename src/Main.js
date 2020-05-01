@@ -14,18 +14,38 @@ export default function Main() {
   const [webPhoto, setWebPhoto] = useState(null)
   const [latLong, setLatLong] = useState({})
   const [salaryData, setSalaryData] = useState([])
+  const [error, setError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+
   const cityChanged = (event) => {
     setCity(event.target.value)
   }
   function reset() {
     salaryData.length = 0;
     nameScore.length = 0;
+    setWebPhoto(null);
+    setError(false);
+    setCityScore('');
+    setCityName('');
+    setErrorMessage('')
+  }
+
+  function invalidInput(data){
+    let trimmed = city.trim();
+    if(trimmed.search(/^[a-zA-Z]+$/) === -1 || trimmed === ''){
+      setError(true)
+      setErrorMessage(`city input must only be A-Z and can't be left empty`)
+    } else if (data === 0){
+      setError(true)
+      setErrorMessage(`Sorry, that city isn't in our database`)
+    }
   }
   const handleSubmit = (event) => {
-    reset();
     event.preventDefault();
+    reset();
+    invalidInput();
     let wrong = "Something went wrong, please try again later"
-    fetch(`https://api.teleport.org/api/cities/?search=${city}`)
+    fetch(`https://api.teleport.org/api/cities/?search=${city}&limit=2`)
       .then(response => {
         if (!response.ok) {
           throw new Error(wrong);
@@ -33,9 +53,7 @@ export default function Main() {
         return response.json();
       })
       .then(citySearchData => {
-        if(citySearchData.count === 0){
-          alert("Sorry, no data for that city")
-        }
+        invalidInput(citySearchData._embedded["city:search-results"].length)
         console.log(citySearchData)
         return fetch(citySearchData._embedded["city:search-results"][0]._links["city:item"].href)
       })
@@ -90,7 +108,7 @@ export default function Main() {
           })
       })
       .catch(err => console.log(err.message))
-  }
+    }
   const scoresList = nameScore.map((value, index) => {
     return <Scores key={index}
       name={value.name}
@@ -111,7 +129,9 @@ export default function Main() {
       <SearchBar
         cityChanged={cityChanged}
         handleSubmit={handleSubmit}
-        value={city}/>
+        value={city.trim() !== '' ? city: ''}/>
+        {error === true &&
+        <h4 id="errorMessage">{errorMessage}</h4>}
       <MapContainer
         latitude={latLong.lat}
         longitude={latLong.long} />

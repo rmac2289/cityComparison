@@ -4,6 +4,7 @@
     min-height: 350px;
     background-size:cover;
     background-repeat: no-repeat;
+    margin-top: 0;
 }
 .title {
     padding-top: 100px;
@@ -11,26 +12,6 @@
     margin-right: auto;
     width: 80%;
     padding-bottom: 25px;
-}
-#headerP {
-    font-size: 20px;
-    text-align: center;
-    background: rgb(200,215,212, 0.75);
-    color: rgb(0,0,0,0.8);
-    width: 85%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-    border: 2px solid rgb(0,0,0,0.7);
-    padding: 1%;
-    margin-bottom: 0;
-    font-family: 'Open Sans', sans-serif;
-    
-}
-#span {
-    border-top: 1px solid rgb(0,0,0,0.1);
-    font-size: 16px;
-    font-family: 'Open Sans', sans-serif;
 }
 .title h1{
     font-family: 'Yellowtail', cursive;
@@ -63,9 +44,6 @@
     .header {
         text-align: right;
         }
-    #headerP {
-        width: 65%;
-    }
 }
 @media only screen and (min-width:900px){
     .title {

@@ -4,6 +4,8 @@ footer {
     min-height: 100px;
     margin-bottom: 0;
     padding-bottom: 0;
+    position: absolute;
+    width: 100%;
    
 }
 #link {
@@ -12,11 +14,18 @@ footer {
     cursor: pointer;
 }
 #link:hover {
-    color: grey;
+    color: rgba(200,215,212,0.7);
     transition: .5s;
+}
+.cursive {
+    font-family: 'Yellowtail', cursive;
 }
 .footerList {
     color: white;
     list-style: none;
-    padding: 2%;
+    padding: 4%;
+}
+#checkout {
+    font-size: 1.2em;
+    font-weight: 600;
 }
