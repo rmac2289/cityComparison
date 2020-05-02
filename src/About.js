@@ -1,9 +1,7 @@
 import React from 'react';
 import './About.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLevelDownAlt } from '@fortawesome/free-solid-svg-icons'
 
-export default function About(props){
+export default function About(){
     return(
         <div className="about">
             <div className="left"><p className="headerP">the app that guides you where you're headed next 

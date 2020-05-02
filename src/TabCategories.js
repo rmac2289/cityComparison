@@ -1,6 +1,7 @@
 import React from 'react';
 import { Tabs, Tab } from 'react-bootstrap'
 import CityImage from './CityImage';
+import POI from './POI';
 
 export default function TabCategories(props) {
     return (
@@ -18,7 +19,9 @@ export default function TabCategories(props) {
                     <p>** Salary range based on salaries between the 25th and 75th percentiles in respective profession</p>
                 </ul>
             </Tab>
-            <Tab eventKey="TBD" title="TBD">
+            <Tab eventKey="Points of Interest" title="Points of Interest">
+                <POI lat={props.lat}
+                    long={props.long}/>
             </Tab>
             <Tab eventKey="TBD" title="TBD">
             </Tab>

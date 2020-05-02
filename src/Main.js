@@ -139,6 +139,8 @@ export default function Main() {
         cityName={cityName}
         score={cityScore} />
       {cityName && <TabCategories
+        lat={latLong.lat}
+        long={latLong.long}
         scoresList={scoresList}
         webPhoto={webPhoto}
         salaryList={salaryList} />}
