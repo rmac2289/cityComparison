@@ -5,6 +5,7 @@ import CityName from './CityName'
 import MapContainer from './Map'
 import Salaries from './Salaries'
 import TabCategories from './TabCategories'
+import apiService from './ApiService'
 
 export default function Main() {
   const [city, setCity] = useState('')
@@ -31,7 +32,6 @@ export default function Main() {
   }
 
   function invalidInput(data){
-    
     let trimmed = city.trim().split(' ').join('')
     if(trimmed.search(/^[a-zA-Z]+$/) === -1 || trimmed === ''){
       setError(true)
@@ -45,71 +45,27 @@ export default function Main() {
     event.preventDefault();
     reset();
     invalidInput();
-    let wrong = "Something went wrong, please try again later"
-    fetch(`https://api.teleport.org/api/cities/?search=${city}&limit=2`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(wrong);
-        }
-        return response.json();
-      })
-      .then(citySearchData => {
-        invalidInput(citySearchData._embedded["city:search-results"].length)
-        console.log(citySearchData)
-        return fetch(citySearchData._embedded["city:search-results"][0]._links["city:item"].href)
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(wrong);
-        }
-        return response.json();
-      })
-      .then(cityData => {
-        return fetch(cityData._links["city:urban_area"].href)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error(wrong);
-            }
-            return response.json();
-          })
-          .then(urbanAreaData => {
-            return fetch(urbanAreaData._links["ua:scores"].href)
-              .then(response => {
-                if (!response.ok) {
-                  throw new Error(wrong);
-                }
-                return response.json()
-              })
-              .then(scoreData => {
-                return fetch(urbanAreaData._links["ua:images"].href)
-                  .then(response => {
-                    if (!response.ok) {
-                      throw new Error(wrong)
-                    }
-                    return response.json()
-                  })
-                  .then(imageLink => {
-                    return fetch(urbanAreaData._links["ua:salaries"].href)
-                      .then(response => {
-                        if (!response.ok) {
-                          throw new Error(wrong)
-                        }
-                        return response.json()
-                      })
-                      .then(salary => {
-                        setLatLong({ lat: cityData.location.latlon.latitude, long: cityData.location.latlon.longitude })
-                        setWebPhoto(imageLink.photos[0].image.web)
-                        setCityScore([...cityScore, scoreData.teleport_city_score])
-                        setNameScore([...nameScore, ...scoreData.categories])
-                        setCityName([cityName, urbanAreaData.full_name])
-                        setSalaryData([...salaryData, ...salary.salaries])
-                      })
-                  })
-              })
-          })
-      })
+    let urbanAreaUrl
+    apiService.searchFetch(city)
+      .then(citySearchData => { invalidInput(citySearchData._embedded["city:search-results"].length)
+    return apiService.cityDataFetch(`${citySearchData._embedded["city:search-results"][0]._links["city:item"].href}`)})
+      .then(cityData => { setLatLong({ lat: cityData.location.latlon.latitude, long: cityData.location.latlon.longitude })
+    return apiService.urbanAreaFetch(cityData._links["city:urban_area"].href)})
+      .then(urbanAreaData => {
+        urbanAreaUrl = urbanAreaData
+        setCityName([cityName, urbanAreaData.full_name])
+    return apiService.scoreDataFetch(urbanAreaData._links["ua:scores"].href)})
+      .then(scoreData => {
+        setCityScore([...cityScore, scoreData.teleport_city_score])
+        setNameScore([...nameScore, ...scoreData.categories])
+    return apiService.imageLinkFetch(urbanAreaUrl._links["ua:images"].href)})
+      .then(imageLink => { setWebPhoto(imageLink.photos[0].image.web)
+    return apiService.salaryDataFetch(urbanAreaUrl._links["ua:salaries"].href)})
+      .then(salary => { setSalaryData([...salaryData, ...salary.salaries])})
       .catch(err => console.log(err.message))
     }
+  
+  
   const scoresList = nameScore.map((value, index) => {
     return <Scores key={index}
       name={value.name}
