@@ -31,11 +31,12 @@ export default function Main() {
   }
 
   function invalidInput(data){
-    let trimmed = city.trim();
+    
+    let trimmed = city.trim().split(' ').join('')
     if(trimmed.search(/^[a-zA-Z]+$/) === -1 || trimmed === ''){
       setError(true)
       setErrorMessage(`city input must only be A-Z and can't be left empty`)
-    } else if (data === 0){
+    } if (data === 0){
       setError(true)
       setErrorMessage(`Sorry, that city isn't in our database`)
     }
@@ -139,6 +140,7 @@ export default function Main() {
         cityName={cityName}
         score={cityScore} />
       {cityName && <TabCategories
+        city={city}
         lat={latLong.lat}
         long={latLong.long}
         scoresList={scoresList}

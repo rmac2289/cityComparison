@@ -4,6 +4,7 @@
 .photo {
     max-height: 450px;
     width: 88%;
+    border-radius: 10px;
 }
 .photoContainer {
    text-align: center;

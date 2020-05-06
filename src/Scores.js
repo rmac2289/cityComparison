@@ -12,7 +12,7 @@ function Scores (props) {
         width: `${rounded}%`
     }
         return(
-            <li className="listItem">
+            <li className="listItem" id="raised">
                 <h3 id="name">{props.name.toLowerCase()}</h3>
                  <p  id= {props.score >= 7 ? "green": props.score < 4 ? "red":"score"} style={pStyle}>
                  {rounded}%</p>
