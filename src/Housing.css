@@ -1,59 +1,44 @@
 #zillow-large-search-box-widget-container {
-    width: 432px;
     overflow: hidden;
-    background-color: #e7f1fd;
+    background-color: rgb(200,215,212, 0.2);
     color: #555;
-    font: normal normal normal 13px verdana, arial, sans-serif;
     line-height: 13px;
     margin: 0 auto;
-    padding: 0;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    text-transform: none;
+}
+#zillow-container {
     text-align: center;
-    border: 1px solid #adcfff;
-    letter-spacing: 0;
-    text-transform: none;
-}
-
-#h2 {
-    color: #d61;
-    text-align: left;
-    font-size: 20px;
-    line-height: 20px;
-    font-weight: normal;
-    float: left;
-    width: 200px;
-    margin-left: 10px;
-    margin-top: 5px;
-    letter-spacing: 0;
-    text-transform: none;
-}
-
-#float-right {
-    float: right;
 }
 
 #zillow-tnc-widget-footer-links {
-    font: normal normal normal 10px verdana, arial, sans-serif;
+    display: flex;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
     text-align: left;
     line-height: 12px;
-    margin: 10px 5px;
     padding: 0;
-    border-spacing: 0;
-    border-collapse: collapse;
 }
 
 #td {
     font-weight: bold;
-    font-size: 10px;
+    font-size: 12px;
     color: #555;
     text-align: left;
     margin: 0;
     padding: 0
 }
-
+iframe {
+    border-radius: 20px;
+    box-shadow: 0px 11px 21px -8px rgba(0,0,0,0.7);
+}
 #locationLink {
     color: #36b;
     font-family: verdana, arial, sans-serif;
-    font-size: 10px;
+    font-size: 12px;
     margin: 0 5px 0 0;
     padding: 0;
     text-decoration: none;
@@ -62,24 +47,29 @@
 #mortgage-rates {
     color: #36b;
     font-family: verdana, arial, sans-serif;
-    font-size: 10px;
+    font-size: 12px;
     margin: 0 5px 0 0;
     padding: 0;
     text-decoration: none;
 }
-
+#powered-by {
+    background: rgb(200,215,212, 0.2);
+}
 #refinance {
     color: #36b;
     font-family: verdana, arial, sans-serif;
-    font-size: 10px;
+    font-size: 12px;
     margin: 0 5px 0 0;
     padding: 0;
     text-decoration: none;
 }
-
+.zeroMargin {
+    margin: 0;
+    padding: 0
+}
 #foreclosures {
     color: #36b;
-    font-size: 10px;
+    font-size: 12px;
     margin: 0 5px 0 0;
     padding: 0;
     text-decoration: none;
@@ -87,7 +77,7 @@
 
 #calculator {
     color: #36b;
-    font-size: 10px;
+    font-size: 12px;
     margin: 0 5px 0 0;
     padding: 0;
     text-decoration: none;
@@ -95,7 +85,7 @@
 
 #rates {
     color: #36b;
-    font-size: 10px;
+    font-size: 12px;
     margin: 0 5px 0 0;
     padding: 0;
     text-decoration: none;

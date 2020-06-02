@@ -21,7 +21,7 @@ export default function TabCategories(props) {
                     <p>** Salary range based on salaries between the 25th and 75th percentiles in respective profession</p>
                 </ul>
             </Tab>
-            <Tab eventKey="Points of Interest" title="POI">
+            <Tab eventKey="Housing" title="Housing">
                 <Housing city={props.city} state={props.state}/>
             </Tab>
             <Tab eventKey="TBD" title="TBD">
