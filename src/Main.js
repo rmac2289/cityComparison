@@ -17,6 +17,7 @@ export default function Main() {
   const [salaryData, setSalaryData] = useState([])
   const [error, setError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
+  const [stateAbb, setStateAbb] = useState('')
 
   const cityChanged = (event) => {
     setCity(event.target.value)
@@ -52,6 +53,13 @@ export default function Main() {
       .then(cityData => { setLatLong({ lat: cityData.location.latlon.latitude, long: cityData.location.latlon.longitude })
     return apiService.urbanAreaFetch(cityData._links["city:urban_area"].href)})
       .then(urbanAreaData => {
+        /* const state = urbanAreaData.name.slice(-2) */ 
+        // setStateAbb(state) //
+        console.log(urbanAreaData)
+        const stateFull = urbanAreaData.full_name.split(' ')
+        const stateName = stateFull.pop()
+        const stateAbbreviation = stateName.slice(0,2)
+        setStateAbb(stateAbbreviation)
         urbanAreaUrl = urbanAreaData
         setCityName([cityName, urbanAreaData.full_name])
     return apiService.scoreDataFetch(urbanAreaData._links["ua:scores"].href)})
@@ -96,6 +104,7 @@ export default function Main() {
         cityName={cityName}
         score={cityScore} />
       {cityName && <TabCategories
+        state={stateAbb}
         city={city}
         lat={latLong.lat}
         long={latLong.long}

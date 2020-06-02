@@ -1,8 +1,8 @@
 import React from 'react';
 import { Tabs, Tab } from 'react-bootstrap'
 import CityImage from './CityImage';
-import POI from './POI';
 import './TabCategories.css';
+import Housing from './Housing'
 
 export default function TabCategories(props) {
     return (
@@ -22,8 +22,7 @@ export default function TabCategories(props) {
                 </ul>
             </Tab>
             <Tab eventKey="Points of Interest" title="POI">
-                <POI lat={props.lat}
-                    long={props.long}/>
+                <Housing city={props.city} state={props.state}/>
             </Tab>
             <Tab eventKey="TBD" title="TBD">
             </Tab>

@@ -15,7 +15,8 @@ function Scores (props) {
             <li className="listItem" id="raised">
                 <h3 id="name">{props.name.toLowerCase()}</h3>
                  <p  id= {props.score >= 7 ? "green": props.score < 4 ? "red":"score"} style={pStyle}>
-                 {rounded}%</p>
+                 {rounded >= 80 ? 'A' : rounded < 80 && rounded >= 60 ? 'B' : rounded < 60 && rounded >= 40 ? 'C' :
+                 rounded < 40 && rounded >= 20 ? 'D': 'F'}</p>
             </li>
         )
     }

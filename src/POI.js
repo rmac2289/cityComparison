@@ -3,14 +3,9 @@ import './POI.css'
 
 
 class POI extends Component {
-    constructor(props){
-        super(props)
-    this.state = {
-        points: []
-    }
-}
+    state = { points: [] }
 
-    componentDidMount(){
+    componentDidMount() {
         let apiKey = `GXu2zkD654xU85AYQL3nTVux09Fwth0K`
         let lat = this.props.lat;
         let long = this.props.long;
@@ -20,27 +15,27 @@ class POI extends Component {
                 return response.json()
             })
             .then(data => {
-                this.setState({points: data.results})
+                this.setState({ points: data.results })
                 console.log(this.state.points)
-        })
+            })
             .catch(error => {
                 console.log(error.message)
-            })  
-    }
-        render(){
-            const pointsList = this.state.points
-            const pointsItems = pointsList.map((value,index) => {
-                return <li className="listItem" key={index}>
-                        <h4><a className="poiLinks" href={value.poi.url ? value.poi.url:`https://www.google.com/search?q=${value.poi.name}%20${value.address.municipality}`} target="_blank" rel="noopener noreferrer">{value.poi.name}</a></h4>
-                        <p>{value.address.freeformAddress}</p>
-                    </li>
             })
-        return(
+    }
+    render() {
+        const pointsList = this.state.points
+        const pointsItems = pointsList.map((value, index) => {
+            return <li className="listItem" key={index}>
+                <h4><a className="poiLinks" href={value.poi.url ? value.poi.url : `https://www.google.com/search?q=${value.poi.name}%20${value.address.municipality}`} target="_blank" rel="noopener noreferrer">{value.poi.name}</a></h4>
+                <p>{value.address.freeformAddress}</p>
+            </li>
+        })
+        return (
             <ul className="poiList salaryList">
                 {pointsItems}
             </ul>
         )
-        }
+    }
 }
 
 
