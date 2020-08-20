@@ -24,8 +24,6 @@ export default function TabCategories(props) {
             <Tab eventKey="Housing" title="Housing">
                 <Housing city={props.city} state={props.state}/>
             </Tab>
-            <Tab eventKey="TBD" title="TBD">
-            </Tab>
         </Tabs>
     )
 }
