@@ -80,15 +80,7 @@ export default function Main() {
       score={value.score_out_of_10}
     />
   })
-  const salaryList = salaryData.map((value, index) => {
-    return <Salaries key={index}
-      jobName={value.job.title}
-      jobSalary25={value.salary_percentiles.percentile_25}
-      jobSalary50={value.salary_percentiles.percentile_50}
-      jobSalary75={value.salary_percentiles.percentile_75}
-      jobCity={city}
-    />
-  })
+  
   return (
     <div className="App">
       <SearchBar
@@ -110,7 +102,7 @@ export default function Main() {
         long={latLong.long}
         scoresList={scoresList}
         webPhoto={webPhoto}
-        salaryList={salaryList} />}
+        salaryList={salaryData} />}
     </div>
   );
 }

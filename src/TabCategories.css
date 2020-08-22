@@ -1,0 +1,26 @@
+
+.recharts-surface {
+    width: 95%;
+    overflow: auto;
+}
+.chart-box {
+    display: flex;
+    flex-direction: column;
+}
+.custom-tooltip {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(0,0,0,0.8);
+    padding: 2%;
+    justify-content: center;
+    text-align: center;
+    border-radius: 5px;
+}
+
+#salary-header {
+    align-self: center;
+    margin-bottom: 0;
+    margin-top: 25px;
+    padding-bottom: 0;
+}
