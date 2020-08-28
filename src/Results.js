@@ -9,7 +9,7 @@ const CustomTooltip = ({ active, payload, label }) => {
     if (active) {
       return (
         <div className="custom-tooltip">
-          <p className="desc">{label}: ${payload[0].value.slice(0,-3)},{payload[0].value.slice(-3)}</p>
+          <p className="tooltip-text">{label}: ${payload[0].value.slice(0,-3)},{payload[0].value.slice(-3)}</p>
         </div>
       );
     }
@@ -35,13 +35,13 @@ export default function TabCategories(props) {
                     image={ props.webPhoto }
                     hidden={ props.webPhoto }
                 />
-                <div className="job-market-box">
-                <h2 className="job-market">Report Card</h2>
+                <div id="report-card-box" className="subheader-box">
+                <h2 className="subheader">Report Card</h2>
             </div>
                 <ul className="mainList">{ props.scoresList }</ul>
             </div>
-            <div className="job-market-box">
-                <h2 className="job-market">Job Market</h2>
+            <div className="subheader-box">
+                <h2 className="subheader">Job Market</h2>
             </div>
             <div eventKey="Salaries" title="Salaries">
                 <div className="chart-box">

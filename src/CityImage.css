@@ -2,9 +2,8 @@
     display: none;
 }
 .photo {
-    max-height: 450px;
-    width: 88%;
-    border-radius: 10px;
+    height: 100%;
+    width: 100%;
 }
 .photoContainer {
    text-align: center;

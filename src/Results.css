@@ -3,6 +3,10 @@
     width: 95%;
     overflow: auto;
 }
+.recharts-wrapper {
+    display: flex;
+    justify-content: center;
+}
 .chart-box {
     display: flex;
     flex-direction: column;
@@ -19,7 +23,7 @@
     flex-direction: column;
 }
 
-.job-market-box {
+.subheader-box {
     text-align: center;
     color: white;
     background: rgb(0,0,0,0.7);
@@ -30,14 +34,17 @@
     margin-top: 50px;
     margin-bottom: 40px;
 }
-.desc {
+#report-card-box {
+    margin-top: 0;
+}
+.tooltip-text {
     margin-top: auto;
     margin-bottom: auto;
 }
 tspan {
     font-weight: 900;
 }
-.job-market {
+.subheader {
     font-weight: 800;
     font-size: 40px;
 }
