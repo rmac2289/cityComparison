@@ -29,11 +29,15 @@ export default function TabCategories(props) {
     })
     return (
         <div className="results" defaultActiveKey="scores" id="noanim-tab-example">
+            
             <div eventKey="scores" title="Scores">
                 <CityImage
                     image={ props.webPhoto }
                     hidden={ props.webPhoto }
                 />
+                <div className="job-market-box">
+                <h2 className="job-market">Report Card</h2>
+            </div>
                 <ul className="mainList">{ props.scoresList }</ul>
             </div>
             <div className="job-market-box">
