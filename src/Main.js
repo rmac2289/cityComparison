@@ -4,7 +4,7 @@ import Scores from './Scores'
 import CityName from './CityName'
 import MapContainer from './Map'
 import Salaries from './Salaries'
-import TabCategories from './TabCategories'
+import TabCategories from './Results'
 import apiService from './ApiService'
 
 export default function Main() {
