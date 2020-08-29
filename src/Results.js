@@ -1,8 +1,6 @@
 import React from 'react';
-import { Tabs, Tab } from 'react-bootstrap'
 import CityImage from './CityImage';
 import './Results.css';
-import Housing from './Housing'
 import { ResponsiveContainer, BarChart, Tooltip, Bar, XAxis, YAxis } from 'recharts';
 
 const CustomTooltip = ({ active, payload, label }) => {
@@ -55,9 +53,6 @@ export default function TabCategories(props) {
                     </BarChart>
                 </ResponsiveContainer>
                 </div>
-            </div>
-            <div eventKey="Housing" title="Housing">
-                <Housing city={props.city} state={props.state}/>
             </div>
         </div>
     )

@@ -3,7 +3,6 @@ import SearchBar from './SearchBar'
 import Scores from './Scores'
 import CityName from './CityName'
 import MapContainer from './Map'
-import Salaries from './Salaries'
 import TabCategories from './Results'
 import apiService from './ApiService'
 
