@@ -15,8 +15,14 @@
     background: white;
     border: 1px solid rgb(0,0,0,0.8);
     padding: 2%;
-    text-align: center;
     border-radius: 5px;
+    text-align: center;
+}
+.label-1 {
+    margin-bottom: 2px;
+}
+.intro-1 {
+    margin-bottom: 5px;
 }
 .results {
     display: flex;
