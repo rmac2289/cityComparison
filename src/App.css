@@ -4,7 +4,7 @@
   }
 
 .App {
-  background-color: rgb(200,215,212, 0.2)
+  background-color: rgb(200,215,212,.2)
 }
 .tabs {
   display: flex;

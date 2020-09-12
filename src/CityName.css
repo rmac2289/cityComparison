@@ -1,22 +1,12 @@
-#cityscore {
-    border: 1px solid white;
-    padding: 1%;
-    max-width: 35%;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 10px;
-}
+
 .nameAndScore {
     text-align: center;
     color: white;
     background: rgb(0,0,0,0.7);
-    padding-bottom: 2%
+    padding: 2%;
     
 }
 #cityName {
     margin-top: 0;
     padding-top: 1%;
-}
-.hidden {
-    display: none;
 }
