@@ -3,8 +3,14 @@ import { Button, InputGroup, FormControl } from "react-bootstrap";
 import "./SearchBar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkedAlt } from "@fortawesome/free-solid-svg-icons";
+import STORE from './STORE';
 
 function SearchBar(props) {
+
+  function getRandomIndex(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
+
   return (
     <form className="searchbar" onSubmit={props.handleSubmit}>
       <FontAwesomeIcon id="map" icon={faMapMarkedAlt} />
@@ -15,7 +21,7 @@ function SearchBar(props) {
           </InputGroup.Text>
         </InputGroup.Prepend>
         <FormControl
-          placeholder="San Francisco"
+          placeholder={STORE[getRandomIndex(STORE.length)].name}
           required
           value={props.value}
           onChange={props.cityChanged}

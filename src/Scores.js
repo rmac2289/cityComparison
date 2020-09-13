@@ -7,14 +7,12 @@ function Scores(props) {
     return y - (y % (precision === undefined ? 1 : +precision));
   };
   const rounded = round_to_precision(props.score, 0.25) * 10;
-  /*const pStyle = {
-        width: `${rounded}%`
-    }*/
+  
   return (
     <li className="listItem" id="raised">
       <h3 id="name">{props.name.toLowerCase()}</h3>
       <div
-        id={props.score >= 7 ? "green" : props.score < 4 ? "red" : "score"}
+        id="score"
         className="p-box"
       >
         <p className="scores-p">

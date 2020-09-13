@@ -14,7 +14,7 @@
     margin-bottom: 0;
     padding-bottom: 0;
 }
-#green, #red, #score {
+#score {
     font-size: 20px;
     font-weight: 800;
     border: 1px solid rgb(0, 0, 0, 0.7);

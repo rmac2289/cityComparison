@@ -3,13 +3,13 @@ import SearchBar from "./SearchBar";
 import Scores from "./Scores";
 import CityName from "./CityName";
 import MapContainer from "./Map";
-import TabCategories from "./Results";
+import Results from "./Results";
 import apiService from "./ApiService";
 
 const scrollToRef = (ref) =>
   window.scrollTo({
     left: 0,
-    top: ref.current.offsetTop - 20,
+    top: ref.current.offsetTop,
     behavior: "smooth",
   });
 
@@ -116,11 +116,12 @@ export default function Main() {
         value={city.trim() !== "" ? city : ""}
       />
       {error === true && <h4 id="errorMessage">{errorMessage}</h4>}
-      <MapContainer latitude={latLong.lat} longitude={latLong.long} />
       <div ref={resultsRef}></div>
+
+      <MapContainer latitude={latLong.lat} longitude={latLong.long} />
       {cityName && <CityName cityName={cityName} score={cityScore} />}
       {cityName && (
-        <TabCategories
+        <Results
           state={stateAbb}
           city={city}
           lat={latLong.lat}

@@ -8,6 +8,7 @@ export class MapContainer extends Component {
   shouldComponentUpdate() {
     return this.props.latitude === undefined ? false : true;
   }
+  
   render() {
     return (
       <div id="mapContainer">

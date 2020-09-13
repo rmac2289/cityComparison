@@ -13,15 +13,20 @@
     margin-right: 25px;
     transition: .4s;
 }
+
 #map {
     padding-bottom: 2%;
     font-size: 40px;
-    color: rgb(200,215,212)
+    color: rgb(200,215,212);
 }
 .label {
     margin-left: 25px;
     width: 400px;
     margin-bottom: 10px;
+}
+input:focus {
+    -webkit-appearance:none;
+    box-shadow: none !important;
 }
 @media only screen and (min-width: 520px){
     #map {
