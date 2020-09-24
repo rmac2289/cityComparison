@@ -43,12 +43,12 @@ export default function Main() {
   function invalidInput(data) {
     let trimmed = city.trim().split(" ").join("");
     if (trimmed.search(/^[a-zA-Z]+$/) === -1 || trimmed === "") {
-      setError(true);
-      setErrorMessage(`city input must only be A-Z and can't be left empty`);
+      setError(() => true);
+      setErrorMessage(() => `city input must only be A-Z and can't be left empty`);
     }
     if (data === 0) {
-      setError(true);
-      setErrorMessage(`Sorry, that city isn't in our database`);
+      setError(() => true);
+      setErrorMessage(() => `Sorry, that city isn't in our database`);
     }
   }
   const handleSubmit = (event) => {
@@ -65,10 +65,12 @@ export default function Main() {
         );
       })
       .then((cityData) => {
-        setLatLong({
+        setLatLong(() => (
+          {
           lat: cityData.location.latlon.latitude,
           long: cityData.location.latlon.longitude,
-        });
+          }
+        ));
         return apiService.urbanAreaFetch(
           cityData._links["city:urban_area"].href
         );
@@ -77,26 +79,26 @@ export default function Main() {
         const stateFull = urbanAreaData.full_name.split(" ");
         const stateName = stateFull.pop();
         const stateAbbreviation = stateName.slice(0, 2);
-        setStateAbb(stateAbbreviation);
+        setStateAbb(() => stateAbbreviation);
         urbanAreaUrl = urbanAreaData;
-        setCityName([urbanAreaData.full_name]);
+        setCityName(() => [urbanAreaData.full_name]);
         return apiService.scoreDataFetch(
           urbanAreaData._links["ua:scores"].href
         );
       })
       .then((scoreData) => {
-        setCityScore([...cityScore, scoreData.teleport_city_score]);
-        setNameScore([...nameScore, ...scoreData.categories]);
+        setCityScore(() => [...cityScore, scoreData.teleport_city_score]);
+        setNameScore(() => [...nameScore, ...scoreData.categories]);
         return apiService.imageLinkFetch(urbanAreaUrl._links["ua:images"].href);
       })
       .then((imageLink) => {
-        setWebPhoto(imageLink.photos[0].image.web);
+        setWebPhoto(() => imageLink.photos[0].image.web);
         return apiService.salaryDataFetch(
           urbanAreaUrl._links["ua:salaries"].href
         );
       })
       .then((salary) => {
-        setSalaryData([...salaryData, ...salary.salaries]);
+        setSalaryData(() => [...salaryData, ...salary.salaries]);
       })
       .catch((err) => console.log(err.message));
     setTimeout(() => resultsScroll(), 1200);

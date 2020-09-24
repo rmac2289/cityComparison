@@ -3,6 +3,12 @@
     width: 95%;
     overflow: auto;
 }
+.mainList {
+    background: white;
+    box-shadow: 0px 11px 21px -8px rgba(0,0,0,.8),
+    0px 0px 10px 10px rgb(200,215,212,.2);
+
+}
 .recharts-wrapper {
     display: flex;
     justify-content: center;

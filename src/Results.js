@@ -29,7 +29,6 @@ export default function TabCategories(props) {
       let highPayloadFormatted;
       const lowArray = payload[0].value[0].split("");
       const highArray = payload[0].value[1].split("");
-
       lowArray.length === 5
         ? lowArray.splice(2, 0, ",")
         : lowArray.splice(3, 0, ",");
@@ -49,6 +48,10 @@ export default function TabCategories(props) {
     }
     return null;
   };
+  const maxDomain = []
+  data.map((v) => maxDomain.push(parseInt(v.Salary[1])))
+  const topRangeRaw = Math.max(...maxDomain)
+  const topRangeRounded = Math.ceil(topRangeRaw/10000)*10000;
   return (
     <div className="results">
       <div>
@@ -79,9 +82,10 @@ export default function TabCategories(props) {
               />
               <XAxis
                 label={{ fill: "rgb(0,0,0,0.8)" }}
-                domain={[0, 300000]}
+                domain={[0, topRangeRounded]}
                 orientation="top"
                 type="number"
+                ticks={[50000,100000,150000,200000,topRangeRounded]}
               />
               <YAxis
                 tickLine={false}
