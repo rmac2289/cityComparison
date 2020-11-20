@@ -44,7 +44,9 @@ export default function Main() {
     let trimmed = city.trim().split(" ").join("");
     if (trimmed.search(/^[a-zA-Z]+$/) === -1 || trimmed === "") {
       setError(() => true);
-      setErrorMessage(() => `city input must only be A-Z and can't be left empty`);
+      setErrorMessage(
+        () => `city input must only be A-Z and can't be left empty`
+      );
     }
     if (data === 0) {
       setError(() => true);
@@ -65,12 +67,10 @@ export default function Main() {
         );
       })
       .then((cityData) => {
-        setLatLong(() => (
-          {
+        setLatLong(() => ({
           lat: cityData.location.latlon.latitude,
           long: cityData.location.latlon.longitude,
-          }
-        ));
+        }));
         return apiService.urbanAreaFetch(
           cityData._links["city:urban_area"].href
         );
